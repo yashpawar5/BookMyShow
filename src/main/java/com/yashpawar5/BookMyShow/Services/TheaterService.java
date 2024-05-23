@@ -21,11 +21,11 @@ public class TheaterService {
     @Autowired
     private TheaterSeatsRepository theaterSeatsRepository;
 
-    public String addTheater(AddTheaterRequest theaterRequest){
+    public String addTheater(AddTheaterRequest addTheaterRequest){
 
-        Theater theater = Theater.builder().noOfScreens(AddTheaterRequest.getNoOfScreens())
-                .name(theaterRequest.getName())
-                .address(theaterRequest.getAddress())
+        Theater theater = Theater.builder().noOfScreens(addTheaterRequest.getNoOfScreens())
+                .name(addTheaterRequest.getName())
+                .address(addTheaterRequest.getAddress())
                 .build();
 
         theater = theaterRepository.save(theater);

@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("theater")
 public class TheaterController {
+
     @Autowired
     private TheaterService theaterService;
-
+    
     @PostMapping("add")
-    public ResponseEntity addTheater(@RequestBody AddTheaterRequest theaterRequest){
+    public ResponseEntity addTheater(@RequestBody AddTheaterRequest addTheaterRequest){
 
-        String response = theaterService.addTheater(AddTheaterRequest);
+        String response = theaterService.addTheater(addTheaterRequest);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
@@ -25,8 +26,9 @@ public class TheaterController {
     @PutMapping("associateSeats")
     public ResponseEntity associateSeats(@RequestBody AddTheaterSeatsRequest theaterSeatsRequest){
 
-        String response = theaterService.associateTheaterSeats(AddTheaterSeatsRequest);
+        String response = theaterService.associateTheaterSeats(theaterSeatsRequest);
         return new ResponseEntity(response,HttpStatus.OK);
     }
+
 
 }

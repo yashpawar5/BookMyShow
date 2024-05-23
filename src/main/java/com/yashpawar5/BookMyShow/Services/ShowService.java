@@ -39,7 +39,6 @@ public class ShowService {
                 .build();
         show = showRepository.save(show);
 
-
         //Associate the corresponding show Seats along with it
         List<TheaterSeat> theaterSeatList = theater.getTheaterSeatList();
 
