@@ -8,23 +8,21 @@ import lombok.*;
 @Table
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShowSeat {
+@Builder
+public class TheaterSeat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer showSeatId;
+    private Integer theaterId;
+
     private String seatNo;
+
     @Enumerated(value = EnumType.STRING)
     private SeatType seatType;
-    private Boolean isBooked;
-    private Boolean isFoodAttached;
 
     @JoinColumn
     @ManyToOne
-    private Show show;
-
-
+    private Theater theater;
 
 }

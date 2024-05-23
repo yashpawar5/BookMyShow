@@ -6,38 +6,35 @@ import lombok.*;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
-@Table
+@Table(name = "shows")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Ticket {
+public class Show {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String ticketId;
-
-    private String bookedSeats;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer showId;
 
     private LocalDate showDate;
 
     private LocalTime showTime;
 
-    private String movieName;
-
-    private String theaterName;
-
-    private Integer totalAmount;
 
     @JoinColumn
     @ManyToOne
-    private Show show;
+    private Movie movie;
 
     @JoinColumn
     @ManyToOne
-    private User user;
+    private Theater theater;
+
+    @OneToMany(mappedBy = "show",cascade = CascadeType.ALL)
+    private List<ShowSeat> showSeatList = new ArrayList<>();
 }

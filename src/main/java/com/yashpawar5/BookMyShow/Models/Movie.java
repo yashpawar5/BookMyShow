@@ -1,10 +1,8 @@
 package com.yashpawar5.BookMyShow.Models;
 
+import com.yashpawar5.BookMyShow.Enums.Language;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
@@ -17,19 +15,22 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieId;
 
+    @Column(unique = true)
     private String movieName;
-
-    private String language;
-
-    private Double rating;
 
     private Double duration;
 
     private LocalDate releaseDate;
+
+    @Enumerated(value = EnumType.STRING)
+    private Language language;
+
+    private Double rating;
 }

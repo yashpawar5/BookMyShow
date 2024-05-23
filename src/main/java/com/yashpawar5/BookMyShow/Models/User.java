@@ -1,10 +1,7 @@
 package com.yashpawar5.BookMyShow.Models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table
@@ -12,16 +9,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    private String userName;
+    private String name;
 
-    private Integer userAge;
+    private Integer age;
 
-    private String phoneNo;
+    private String mobileNo;
 
     private String emailId;
 }
