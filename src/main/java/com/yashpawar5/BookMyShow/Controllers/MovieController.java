@@ -41,6 +41,10 @@ public class MovieController {
         return new ResponseEntity(response,HttpStatus.OK);
     }
 
-
+    @GetMapping("movieRevenue")
+    public ResponseEntity getMovieRevenue(@RequestParam int movieId){
+        String response = movieService.getMovieRevenue(movieId);
+        return new ResponseEntity(response,HttpStatus.OK);
+    }
 
 }

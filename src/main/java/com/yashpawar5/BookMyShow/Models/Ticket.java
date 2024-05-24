@@ -44,4 +44,8 @@ public class Ticket {
     @JoinColumn
     @ManyToOne
     private Theater theaters;
+
+    @JoinColumn
+    @ManyToOne
+    private Movie movies;
 }

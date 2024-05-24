@@ -3,6 +3,7 @@ package com.yashpawar5.BookMyShow.Services;
 import com.yashpawar5.BookMyShow.Models.Movie;
 import com.yashpawar5.BookMyShow.Models.Show;
 import com.yashpawar5.BookMyShow.Models.Theater;
+import com.yashpawar5.BookMyShow.Models.Ticket;
 import com.yashpawar5.BookMyShow.Repositories.MovieRepository;
 import com.yashpawar5.BookMyShow.Requests.AddMovieRequest;
 import com.yashpawar5.BookMyShow.Requests.UpdateMovieRequest;
@@ -45,7 +46,19 @@ public class MovieService {
         return theaters;
     }
 
+    public String getMovieRevenue(int movieId) {
+        Movie movie = movieRepository.findById(movieId).get();
+        List<Ticket> ticketList = movie.getTicketList();
 
+        Integer movieRevenue = 0;
+        for (Ticket ticket : ticketList) {
+            if(ticket.getMovieName() == movie.getMovieName()){
+                movieRevenue += ticket.getTotalAmount();;
+            }
+
+        }
+        return "Total revenue for movie: "+movieId+" is "+movieRevenue;
+    }
 
     public String updateMovieAttributes(UpdateMovieRequest movieRequest){
 
