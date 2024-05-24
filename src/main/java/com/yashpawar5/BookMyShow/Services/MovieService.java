@@ -1,11 +1,16 @@
 package com.yashpawar5.BookMyShow.Services;
 
 import com.yashpawar5.BookMyShow.Models.Movie;
+import com.yashpawar5.BookMyShow.Models.Show;
+import com.yashpawar5.BookMyShow.Models.Theater;
 import com.yashpawar5.BookMyShow.Repositories.MovieRepository;
 import com.yashpawar5.BookMyShow.Requests.AddMovieRequest;
 import com.yashpawar5.BookMyShow.Requests.UpdateMovieRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MovieService {
@@ -26,6 +31,21 @@ public class MovieService {
         movie = movieRepository.save(movie);
         return "Movie has been added to the DB with movieId "+movie.getMovieId();
     }
+
+    public List getTheaters(int movieId) {
+        Movie movie = movieRepository.findById(movieId).get();
+        List<Show> shows = movie.getShowsList();
+        List<Theater> theaters = new ArrayList<>();
+
+        for (Show show : shows) {
+            if(show.getMovie().getMovieId() == movieId) {
+                theaters.add(show.getTheater());
+            }
+        }
+        return theaters;
+    }
+
+
 
     public String updateMovieAttributes(UpdateMovieRequest movieRequest){
 

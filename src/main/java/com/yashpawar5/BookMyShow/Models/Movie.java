@@ -6,7 +6,9 @@ import lombok.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -33,4 +35,7 @@ public class Movie {
     private Language language;
 
     private Double rating;
+
+    @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
+    private List<Show> showsList = new ArrayList<>();
 }
