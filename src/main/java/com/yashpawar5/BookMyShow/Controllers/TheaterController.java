@@ -30,5 +30,10 @@ public class TheaterController {
         return new ResponseEntity(response,HttpStatus.OK);
     }
 
+    @GetMapping("theaterRevenue")
+    public ResponseEntity getTheaterRevenue(@RequestParam Integer theaterId){
+        String response = theaterService.getTheaterRevenue(theaterId);
+        return new ResponseEntity(response,HttpStatus.OK);
+    }
 
 }

@@ -27,4 +27,7 @@ public class Theater {
     //Bidirectional mapping in the parent to keep a record of the child
     @OneToMany(mappedBy = "theater",cascade = CascadeType.ALL)
     private List<TheaterSeat> theaterSeatList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "theaters",cascade = CascadeType.ALL)
+    private List<Ticket> ticketList = new ArrayList<>();
 }

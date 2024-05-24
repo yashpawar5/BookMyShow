@@ -40,4 +40,8 @@ public class Ticket {
     @JoinColumn
     @ManyToOne
     private User user;
+
+    @JoinColumn
+    @ManyToOne
+    private Theater theaters;
 }

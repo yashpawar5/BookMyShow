@@ -29,7 +29,7 @@ public class UserService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo(userRequest.getEmailId());
-        mailMessage.setFrom("springacciojob@gmail.com");
+        mailMessage.setFrom("masterchief000e@gmail.com");
         mailMessage.setSubject("Welcome to Book My Show Application !!");
 
         String body = "Hi "+userRequest.getName()+" !" +
