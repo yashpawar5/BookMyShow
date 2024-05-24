@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("theater")
 public class TheaterController {
@@ -31,8 +33,9 @@ public class TheaterController {
     }
 
     @GetMapping("theaterRevenue")
-    public ResponseEntity getTheaterRevenue(@RequestParam Integer theaterId){
-        String response = theaterService.getTheaterRevenue(theaterId);
+    public ResponseEntity getTheaterRevenue(@RequestParam Integer theaterId,
+                                            @RequestParam LocalDate localDate){
+        String response = theaterService.getTheaterRevenue(theaterId, localDate);
         return new ResponseEntity(response,HttpStatus.OK);
     }
 
