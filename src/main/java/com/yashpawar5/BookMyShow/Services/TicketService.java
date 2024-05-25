@@ -26,6 +26,9 @@ public class TicketService {
     @Autowired
     private TheaterRepository theaterRepository;
 
+    @Autowired
+    private MovieRepository movieRepository;
+
     public String bookTicket(BookTicketRequest bookTicketRequest){
 
         //1. Find the Show Entity
@@ -35,6 +38,8 @@ public class TicketService {
         User user = userRepository.findById(bookTicketRequest.getUserId()).get();
 
         Theater theater = theaterRepository.findById(show.getTheater().getTheaterId()).get();
+
+        Movie movie = movieRepository.findById(show.getMovie().getMovieId()).get();
 
         //3. Mark those Seats as booked now and calculate total Amount
         Integer totalAmount = 0;
@@ -63,6 +68,7 @@ public class TicketService {
                 .show(show)
                 .user(user)
                 .theaters(theater)
+                .movies(movie)
                 .build();
 
 

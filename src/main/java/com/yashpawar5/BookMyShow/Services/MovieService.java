@@ -49,11 +49,10 @@ public class MovieService {
     public String getMovieRevenue(int movieId) {
         Movie movie = movieRepository.findById(movieId).get();
         List<Ticket> ticketList = movie.getTicketList();
-
         Integer movieRevenue = 0;
         for (Ticket ticket : ticketList) {
-            if(ticket.getMovieName() == movie.getMovieName()){
-                movieRevenue += ticket.getTotalAmount();;
+            if(ticket.getMovieName().equals(movie.getMovieName())){
+                movieRevenue += ticket.getTotalAmount();
             }
 
         }
