@@ -36,11 +36,10 @@ public class MovieService {
     public List getTheaters(int movieId) {
         Movie movie = movieRepository.findById(movieId).get();
         List<Show> shows = movie.getShowsList();
-        List<Theater> theaters = new ArrayList<>();
-
+        List<String > theaters = new ArrayList<>();
         for (Show show : shows) {
-            if(show.getMovie().getMovieId() == movieId) {
-                theaters.add(show.getTheater());
+            if(show.getMovie().getMovieId().equals(movieId) && (!theaters.contains(show.getTheater().getName()))) {
+                theaters.add(show.getTheater().getName());
             }
         }
         return theaters;
