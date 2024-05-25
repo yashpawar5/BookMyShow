@@ -1,14 +1,8 @@
 package com.yashpawar5.BookMyShow.Services;
 
 import com.yashpawar5.BookMyShow.Enums.SeatType;
-import com.yashpawar5.BookMyShow.Models.Show;
-import com.yashpawar5.BookMyShow.Models.ShowSeat;
-import com.yashpawar5.BookMyShow.Models.Ticket;
-import com.yashpawar5.BookMyShow.Models.User;
-import com.yashpawar5.BookMyShow.Repositories.ShowRepository;
-import com.yashpawar5.BookMyShow.Repositories.ShowSeatRepository;
-import com.yashpawar5.BookMyShow.Repositories.TicketRepository;
-import com.yashpawar5.BookMyShow.Repositories.UserRepository;
+import com.yashpawar5.BookMyShow.Models.*;
+import com.yashpawar5.BookMyShow.Repositories.*;
 import com.yashpawar5.BookMyShow.Requests.BookTicketRequest;
 import com.yashpawar5.BookMyShow.Responses.TicketResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +23,8 @@ public class TicketService {
 
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private TheaterRepository theaterRepository;
 
     public String bookTicket(BookTicketRequest bookTicketRequest){
 
@@ -37,6 +33,8 @@ public class TicketService {
 
         //2. Find the User Entity
         User user = userRepository.findById(bookTicketRequest.getUserId()).get();
+
+        Theater theater = theaterRepository.findById(show.getTheater().getTheaterId()).get();
 
         //3. Mark those Seats as booked now and calculate total Amount
         Integer totalAmount = 0;
@@ -64,6 +62,7 @@ public class TicketService {
                 .bookedSeats(bookTicketRequest.getRequestedSeats().toString())
                 .show(show)
                 .user(user)
+                .theaters(theater)
                 .build();
 
 
