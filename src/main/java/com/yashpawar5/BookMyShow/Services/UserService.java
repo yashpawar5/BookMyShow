@@ -1,5 +1,6 @@
 package com.yashpawar5.BookMyShow.Services;
 
+import com.yashpawar5.BookMyShow.Models.Ticket;
 import com.yashpawar5.BookMyShow.Models.User;
 import com.yashpawar5.BookMyShow.Repositories.UserRepository;
 import com.yashpawar5.BookMyShow.Requests.AddUserRequest;
@@ -7,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-;
+;import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -16,6 +18,21 @@ public class UserService {
 
     @Autowired
     private JavaMailSender javaMailSender;
+
+    public List getBookingHistory(int userId) {
+        User user = userRepository.findById(userId).get();
+        List<Ticket> ticketList = user.getTicketList();
+        List<String> bookingHistory  = new ArrayList();
+        for (Ticket ticket : ticketList) {
+            if(ticket.getUser().getUserId().equals(userId)) {
+                String response = "Ticket Id:"+ticket.getTicketId()+", Movie:"+ticket.getMovieName()+
+                        ", Show Date:"+ticket.getShowDate()+", Show Time:"+ticket.getShowTime()+
+                        ", Theater:"+ticket.getTheaterName()+", Total Amount:"+ticket.getTotalAmount();
+                bookingHistory.add(response);
+            }
+        }
+        return bookingHistory;
+    }
 
     public String addUser(AddUserRequest userRequest){
 
