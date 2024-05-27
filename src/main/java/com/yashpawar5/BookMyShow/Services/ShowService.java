@@ -31,6 +31,8 @@ public class ShowService {
         Movie movie = movieRepository.findMovieByMovieName(showRequest.getMovieName());
         Theater theater = theaterRepository.findById(showRequest.getTheaterId()).get();
 
+        Theater theaterM = theaterRepository.findById(showRequest.getTheaterId()).get();
+
         //Add validations on if movie and theater are valid scenarios
         Show show = Show.builder().showDate(showRequest.getShowDate())
                 .showTime(showRequest.getShowTime())

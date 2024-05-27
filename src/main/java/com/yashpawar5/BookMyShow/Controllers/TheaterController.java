@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("theater")
@@ -37,6 +38,12 @@ public class TheaterController {
                                             @RequestParam LocalDate localDate){
         String response = theaterService.getTheaterRevenue(theaterId, localDate);
         return new ResponseEntity(response,HttpStatus.OK);
+    }
+
+    @GetMapping("movieList")
+    public ResponseEntity getMovieList(@RequestParam Integer theaterId){
+        List response = theaterService.getMovieList(theaterId);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
 }
