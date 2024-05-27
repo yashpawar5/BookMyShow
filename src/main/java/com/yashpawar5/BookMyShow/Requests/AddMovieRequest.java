@@ -1,5 +1,6 @@
 package com.yashpawar5.BookMyShow.Requests;
 
+import com.yashpawar5.BookMyShow.Enums.Genre;
 import com.yashpawar5.BookMyShow.Enums.Language;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -15,5 +16,6 @@ public class AddMovieRequest {
     private Double rating;
     private Double duration;
     private LocalDate releaseDate;
+    private Genre genre;
 
 }

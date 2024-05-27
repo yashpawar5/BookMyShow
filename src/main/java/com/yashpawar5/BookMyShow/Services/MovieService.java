@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -28,6 +30,7 @@ public class MovieService {
         movie.setLanguage(movieRequest.getLanguage());
         movie.setRating(movieRequest.getRating());
         movie.setReleaseDate(movieRequest.getReleaseDate());
+        movie.setGenre(movieRequest.getGenre());
 
         movie = movieRepository.save(movie);
         return "Movie has been added to the DB with movieId "+movie.getMovieId();
@@ -43,6 +46,21 @@ public class MovieService {
             }
         }
         return theaters;
+    }
+
+    public List getRecommendMovies(int movieId) {
+        Movie movie = movieRepository.findById(movieId).get();
+        List<Movie> movies = movieRepository.getMoviesByGenre(movie.getGenre());
+        List<Movie> sortedMovies = movies.stream()
+                .sorted(Comparator.comparingDouble(Movie::getRating).reversed()) // Descending order
+                .collect(Collectors.toList());
+        sortedMovies.remove(movie);
+        List<String > recommendedMovies = new ArrayList<>();
+        for (Movie mov : sortedMovies) {
+//            String response = "The movie: '"+mov.getMovieName()+"' has a rating of "+mov.getRating();
+            recommendedMovies.add(mov.getMovieName());
+        }
+        return recommendedMovies;
     }
 
     public String getMovieRevenue(int movieId) {

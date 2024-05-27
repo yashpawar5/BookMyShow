@@ -1,5 +1,6 @@
 package com.yashpawar5.BookMyShow.Models;
 
+import com.yashpawar5.BookMyShow.Enums.Genre;
 import com.yashpawar5.BookMyShow.Enums.Language;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,6 +31,8 @@ public class Movie {
     private Double duration;
 
     private LocalDate releaseDate;
+
+    private Genre genre;
 
     @Enumerated(value = EnumType.STRING)
     private Language language;

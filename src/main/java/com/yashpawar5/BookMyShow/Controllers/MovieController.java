@@ -47,4 +47,10 @@ public class MovieController {
         return new ResponseEntity(response,HttpStatus.OK);
     }
 
+    @GetMapping("recommendMovie")
+    public ResponseEntity getRecommendMovies(@RequestParam int movieId){
+        List response = movieService.getRecommendMovies(movieId);
+        return new ResponseEntity(response,HttpStatus.OK);
+    }
+
 }
